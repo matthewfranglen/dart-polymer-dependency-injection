@@ -5,7 +5,6 @@ homepage: https://github.com/matthewfranglen/dart-polymer-dependency-injection
 description: Spring style annotation driven dependency injection with DOM scanning for autoconfiguration
 dependencies:
   polymer: ">=0.14.0 <0.16.0"
-  patch_mirrors: ">=0.0.1 <0.1.0"
   annotate: ">=0.0.1 <0.1.0"
   dependency_injection:
     git: git@github.com:matthewfranglen/dart-dependency-injection.git
