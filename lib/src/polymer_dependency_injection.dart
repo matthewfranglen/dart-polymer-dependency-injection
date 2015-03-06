@@ -6,7 +6,7 @@ class AbstractHtmlInjectConfiguration extends AbstractInjectConfiguration {
 
   void scan(Element root) {
     _findPolymerElements(root)
-      .where(objectHasAnnotationFilter(Component))
+      .where(InstanceAnnotationFacade.filterByAnnotation(Component))
       .map((PolymerElement element) => new BeanInstance(element))
       .forEach(addBean);
   }
