@@ -10,3 +10,7 @@ dependencies:
     git: git@github.com:matthewfranglen/dart-dependency-injection.git
 dev_dependencies:
   unittest: any
+transformers:
+- polymer:
+    entry_points:
+      - test/test_polymer_dependency_injection.html
