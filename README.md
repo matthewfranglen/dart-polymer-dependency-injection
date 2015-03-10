@@ -31,9 +31,31 @@ Within those classes you can define Autowired fields. The AbstractHtmlInjectConf
       @autowired void setAnotherClass(AnotherClass bean) {}
     }
 
+Define some of your Polymer Elements as Components. When the DOM is scanned these will be treated as Beans. They can include Autowired fields:
+
+    @CustomTag('some-element')
+    @component
+    class SomeElement extends PolymerElement {
+
+      @autowired AnotherElement field;
+
+      SomeElement.created() : super.created();
+    }
+
+You first scan the DOM by passing elements to the _scan_ method. Those elements, and elements reachable from those elements are scanned for Components. This scanning will check the shadow DOM of Polymer Elements:
+
+    new Configuration()
+      .scan(document.querySelector('my-header'))
+      .scan(document.querySelector('my-body'))
+      .scan(document.querySelector('my-footer'));
+
 You then trigger loading the beans and autowiring the fields by calling _configure_ on an instance of the AbstractHtmlInjectConfiguration:
 
-    new Configuration().configure();
+    new Configuration()
+      .scan(document.querySelector('my-header'))
+      .scan(document.querySelector('my-body'))
+      .scan(document.querySelector('my-footer'))
+      .configure();
 
 You can only use the Bean annotation on methods. The arguments to those methods are autowired, allowing you to reference other beans:
 
@@ -95,7 +117,13 @@ This library allows you to define _Beans_, which are the values which can be inj
 
 ### DOM Scanning
 
-...
+The coupling issue is particularly acute with Polymer Elements. If an element needs to trigger another then it is very hard to do so without reaching out to that element in the DOM. This couples the two elements to the particular layout they are in. Using events allows some decoupling, but that requires that one element contain the other.
+
+With DOM scanning the elements can be isolated from each other. Each element can define the beans it requires using interfaces, allowing for easy testing and reuse. The DOM scanning includes the shadow DOM of Polymer Elements. This allows arbitrary element layout.
+
+To trigger DOM scanning you only need to call the _scan_ method on the AbstractHtmlInjectConfiguration subclass. This method takes any html Element and will scan that and every directly or indirectly contained element.
+
+You must call _scan_ before you call _configure_. This is because _scan_ registers the discovered elements as Beans, ready for autowiring. The autowiring only occurs when _configure_ is called.
 
 Example Code
 ------------
