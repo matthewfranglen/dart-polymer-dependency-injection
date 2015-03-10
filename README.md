@@ -31,32 +31,6 @@ Within those classes you can define Autowired fields. The AbstractHtmlInjectConf
       @autowired void setAnotherClass(AnotherClass bean) {}
     }
 
-Define some of your Polymer Elements as Components. When the DOM is scanned these will be treated as Beans. They can include Autowired fields:
-
-    @CustomTag('some-element')
-    @component
-    class SomeElement extends PolymerElement {
-
-      @autowired AnotherElement field;
-
-      SomeElement.created() : super.created();
-    }
-
-You first scan the DOM by passing elements to the _scan_ method. Those elements, and elements reachable from those elements are scanned for Components. This scanning will check the shadow DOM of Polymer Elements:
-
-    new Configuration()
-      ..scan(document.querySelector('my-header'))
-      ..scan(document.querySelector('my-body'))
-      ..scan(document.querySelector('my-footer'));
-
-You then trigger loading the beans and autowiring the fields by calling _configure_ on an instance of the AbstractHtmlInjectConfiguration:
-
-    new Configuration()
-      ..scan(document.querySelector('my-header'))
-      ..scan(document.querySelector('my-body'))
-      ..scan(document.querySelector('my-footer'))
-      ..configure();
-
 You can only use the Bean annotation on methods. The arguments to those methods are autowired, allowing you to reference other beans:
 
     class Configuration extends AbstractHtmlInjectConfiguration {
@@ -79,7 +53,7 @@ Methods, setters, and fields can be autowired. A method that is autowired can ac
       @autowired void method(SomeClass someBean, AnotherClass anotherBean) {}
     }
 
-PolymerElements can be annotated with _Component_ to indicate that they are a bean. Once annotated they are able to be injected into autowired containers and may be autowired themselves:
+Polymer Elements can be annotated with _Component_ to indicate that they are a bean. Once annotated they are able to be injected into autowired containers and may be autowired themselves:
 
     @PolymerElement('some-bean')
     @component
@@ -95,7 +69,7 @@ You can load the element by scanning the DOM. This is done using the AbstractHtm
       ..scan(document.querySelector('body'))
       ..configure();
 
-The scanning process will traverse the shadow dom of any PolymerElement found. This means that you can annotate PolymerElements that are deep within the DOM. You can restrict the search by using a more specific element to start the scanning process from. It is possible to call _scan_ multiple times before calling configure:
+The scanning process will traverse the shadow DOM of any Polymer Element found. This means that you can annotate Polymer Elements that are deep within the DOM. You can restrict the search by using a more specific element to start the scanning process from. It is possible to call _scan_ multiple times before calling configure:
 
     new Configuration()
       ..scan(document.querySelector('my-header'))
