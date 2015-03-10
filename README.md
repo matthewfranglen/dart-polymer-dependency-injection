@@ -45,17 +45,17 @@ Define some of your Polymer Elements as Components. When the DOM is scanned thes
 You first scan the DOM by passing elements to the _scan_ method. Those elements, and elements reachable from those elements are scanned for Components. This scanning will check the shadow DOM of Polymer Elements:
 
     new Configuration()
-      .scan(document.querySelector('my-header'))
-      .scan(document.querySelector('my-body'))
-      .scan(document.querySelector('my-footer'));
+      ..scan(document.querySelector('my-header'))
+      ..scan(document.querySelector('my-body'))
+      ..scan(document.querySelector('my-footer'));
 
 You then trigger loading the beans and autowiring the fields by calling _configure_ on an instance of the AbstractHtmlInjectConfiguration:
 
     new Configuration()
-      .scan(document.querySelector('my-header'))
-      .scan(document.querySelector('my-body'))
-      .scan(document.querySelector('my-footer'))
-      .configure();
+      ..scan(document.querySelector('my-header'))
+      ..scan(document.querySelector('my-body'))
+      ..scan(document.querySelector('my-footer'))
+      ..configure();
 
 You can only use the Bean annotation on methods. The arguments to those methods are autowired, allowing you to reference other beans:
 
@@ -92,16 +92,16 @@ PolymerElements can be annotated with _Component_ to indicate that they are a be
 You can load the element by scanning the DOM. This is done using the AbstractHtmlInjectConfiguration subclass, and must be done before calling configure:
 
     new Configuration()
-      .scan(document.querySelector('body'))
-      .configure();
+      ..scan(document.querySelector('body'))
+      ..configure();
 
 The scanning process will traverse the shadow dom of any PolymerElement found. This means that you can annotate PolymerElements that are deep within the DOM. You can restrict the search by using a more specific element to start the scanning process from. It is possible to call _scan_ multiple times before calling configure:
 
     new Configuration()
-      .scan(document.querySelector('my-header'))
-      .scan(document.querySelector('my-body'))
-      .scan(document.querySelector('my-footer'))
-      .configure();
+      ..scan(document.querySelector('my-header'))
+      ..scan(document.querySelector('my-body'))
+      ..scan(document.querySelector('my-footer'))
+      ..configure();
 
 
 Description
