@@ -13,4 +13,5 @@ dev_dependencies:
 transformers:
 - polymer:
     entry_points:
+      - example/index.html
       - test/test_polymer_dependency_injection.html

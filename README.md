@@ -128,7 +128,7 @@ You must call _scan_ before you call _configure_. This is because _scan_ registe
 Example Code
 ------------
 
-...
+Example code is available in the _example_ directory.
 
 Dependency Injection
 --------------------
