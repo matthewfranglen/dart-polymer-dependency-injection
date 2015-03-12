@@ -2,6 +2,7 @@ library polymer_dependency_injection;
 
 import 'dart:html';
 import 'package:polymer/polymer.dart';
+import 'package:logging/logging.dart';
 import 'package:annotate/annotate.dart';
 import 'package:dependency_injection/dependency_injection.dart';
 
