@@ -2,6 +2,8 @@ part of polymer_dependency_injection;
 
 class AbstractHtmlInjectConfiguration extends AbstractInjectConfiguration {
 
+  static final Logger log = new Logger('AbstractHtmlInjectConfiguration');
+
   AbstractHtmlInjectConfiguration();
 
   void scan(Element root) {
@@ -25,7 +27,7 @@ class AbstractHtmlInjectConfiguration extends AbstractInjectConfiguration {
 
   void _searchForPolymerElements(Element element, List<PolymerElement> results, var searchClosure) {
     if (element is PolymerElement) {
-      print("Found ${element}");
+      log.fine("Found ${element}");
       results.add(element);
 
       element.shadowRoot.childNodes
