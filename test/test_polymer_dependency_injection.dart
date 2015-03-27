@@ -5,15 +5,24 @@ import 'dart:html';
 import 'package:polymer/polymer.dart';
 import 'package:unittest/unittest.dart';
 import 'package:unittest/html_config.dart';
+import 'package:logging/logging.dart';
 import 'test_data.dart';
 
 final String nl = "\n     ";
 
 void main() {
-  initPolymer().run(runTests);
+  configureLogging();
+  initPolymer().then((v) {
+    Polymer.onReady.then(runTests);
+  });
 }
 
-void runTests() {
+void configureLogging() {
+  Logger.root.level = Level.ALL;
+  Logger.root.onRecord.forEach(print);
+}
+
+void runTests(v) {
   useHtmlConfiguration();
 
   group('Given a @Configuration class instance${nl}', () {
