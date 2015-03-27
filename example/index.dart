@@ -5,7 +5,7 @@ import 'package:polymer/polymer.dart';
 import 'package:polymer_dependency_injection/polymer_dependency_injection.dart';
 
 void main() {
-  initPolymer().run(() {
+  initPolymer().then((v) {
     Polymer.onReady.then(load);
   });
 }
