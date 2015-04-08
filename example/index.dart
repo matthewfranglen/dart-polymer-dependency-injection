@@ -11,9 +11,15 @@ void main() {
 }
 
 void load(v) {
-  new Configuration()
-    ..scan(document.querySelector('body'))
-    ..configure();
+  try {
+    new Configuration()
+      ..scan(document.querySelector('body'))
+      ..configure();
+  }
+  catch (exception, stackTrace) {
+    print("Failed to configure: ${exception}");
+    print(stackTrace);
+  }
 }
 
 class Configuration extends AbstractHtmlInjectConfiguration {}
