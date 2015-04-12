@@ -1,3 +1,5 @@
+library polymer_dependency_injection.test.test_data;
+
 import 'package:polymer_dependency_injection/polymer_dependency_injection.dart';
 import 'tags/mock_autowired_component.dart';
 import 'tags/mock_component.dart';

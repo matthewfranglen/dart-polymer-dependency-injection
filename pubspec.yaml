@@ -9,6 +9,8 @@ dependencies:
   dependency_injection:
     git: git@github.com:matthewfranglen/dart-dependency-injection.git
 dev_dependencies:
+  behave:
+    git: git@github.com:matthewfranglen/dart-behave.git
   unittest: any
 transformers:
 - polymer:
