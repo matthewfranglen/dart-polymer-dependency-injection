@@ -16,4 +16,6 @@ transformers:
 - polymer:
     entry_points:
       - example/index.html
+      - example/tests/x_button_test.html
+      - example/tests/x_label_test.html
       - test/test_polymer_dependency_injection.html
