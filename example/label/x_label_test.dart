@@ -1,5 +1,6 @@
 library polymer_dependency_injection.example.test.test_label;
 
+import 'dart:async';
 import 'dart:html';
 import 'package:polymer/polymer.dart';
 import 'package:unittest/unittest.dart';
@@ -7,7 +8,6 @@ import 'package:unittest/html_config.dart';
 import 'package:logging/logging.dart';
 import 'package:behave/behave.dart';
 import 'package:polymer_dependency_injection/polymer_dependency_injection.dart';
-import 'x_label.dart';
 import '../interfaces.dart';
 
 
@@ -48,7 +48,7 @@ class _Steps {
     configuration.configure();
 
     context["configuration"] = configuration;
-    context["label"] = document.querySelector("x-label");
+    context["label"] = document.querySelector("x-label::shadow p");
   }
 
   @When("I increment the incrementable")
@@ -59,9 +59,11 @@ class _Steps {
 
   @Then("the label is updated")
   void testConfigurationFails(Map<String, dynamic> context) {
-    LabelTag label = context["label"] as LabelTag;
+    Element label = context["label"] as Element;
+    Duration oneMillisecond = new Duration(milliseconds: 1);
 
-    expect(label.count, equals(1));
+    // Must delay the test otherwise polymer cannot update the HTML
+    new Future.delayed(oneMillisecond, () => expect(label.text, contains("1")));
   }
 }
 
