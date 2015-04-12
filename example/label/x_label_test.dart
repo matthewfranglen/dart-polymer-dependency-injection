@@ -7,7 +7,7 @@ import 'package:unittest/html_config.dart';
 import 'package:logging/logging.dart';
 import 'package:behave/behave.dart';
 import 'package:polymer_dependency_injection/polymer_dependency_injection.dart';
-import '../tags/x_label.dart';
+import 'x_label.dart';
 import '../interfaces.dart';
 
 

@@ -1,6 +1,5 @@
 library polymer_dependency_injection.test.test_polymer_dependency_injection;
 
-import 'dart:async';
 import 'dart:html';
 import 'package:polymer/polymer.dart';
 import 'package:unittest/unittest.dart';
