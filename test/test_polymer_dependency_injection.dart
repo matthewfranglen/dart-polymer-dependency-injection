@@ -1,14 +1,14 @@
 library polymer_dependency_injection.test.test_polymer_dependency_injection;
 
-import 'dart:async';
 import 'dart:html';
 import 'package:polymer/polymer.dart';
 import 'package:unittest/unittest.dart';
 import 'package:unittest/html_config.dart';
 import 'package:logging/logging.dart';
+import 'package:behave/behave.dart';
+import 'package:polymer_dependency_injection/polymer_dependency_injection.dart';
 import 'test_data.dart';
 
-final String nl = "\n     ";
 
 void main() {
   configureLogging();
@@ -25,49 +25,78 @@ void configureLogging() {
 void runTests(v) {
   useHtmlConfiguration();
 
-  group('Given a @Configuration class instance${nl}', () {
-    TestConfiguration configuration;
+  Feature feature = new Feature("Can scan DOM for beans and autowires");
 
-    setUp(() {
-      configuration = new TestConfiguration();
-    });
-    test('When I configure the instance${nl} Then the configuration fails',
-      () {
-        expect(() => configuration.configure(), throws);
-      }
-    );
-    test('When I scan the DOM${nl} And configure the instance${nl} Then the configuration succeeds',
-      () {
-        expect(triggerConfiguration(configuration), returnsNormally);
-      }
-    );
-    test('When I scan the DOM${nl} And configure the instance${nl} Then the configuration is autowired',
-      () => when(triggerConfiguration(configuration)).then(configurationHasBeenAutowired)
-    );
-    test('When I scan the DOM${nl} And configure the instance${nl} Then the beans are autowired',
-      () => when(triggerConfiguration(configuration)).then(beansHaveBeenAutowired)
-    );
-  });
+  feature.load(new _Steps());
+
+  feature.scenario("A bean with an unmet DOM dependency")
+    .given("a @Configuration class instance")
+    .when("I call configure() on the configuration")
+    .then("the configuration fails")
+    .test();
+
+  feature.scenario("A bean with a DOM dependency")
+    .given("a @Configuration class instance")
+    .when("I scan the DOM")
+    .and("I call configure() on the configuration")
+    .then("the configuration succeeds")
+    .test();
+
+  feature.scenario("A bean with a DOM dependency")
+    .given("a @Configuration class instance")
+    .when("I scan the DOM")
+    .and("I call configure() on the configuration")
+    .then("the configuration is autowired")
+    .test();
+
+  feature.scenario("A bean with a DOM dependency")
+    .given("a @Configuration class instance")
+    .when("I scan the DOM")
+    .and("I call configure() on the configuration")
+    .then("the beans are autowired")
+    .test();
 }
 
-typedef dynamic Clause();
+class _Steps {
 
-Future<dynamic> given(Clause clause) => new Future.value(clause());
-Future<dynamic> when(Clause clause) => new Future.value(clause());
+  @Given("a @Configuration class instance")
+  void makeConfiguration(Map<String, dynamic> context) {
+    context["configuration"] = new TestConfiguration();
+  }
 
-Clause triggerConfiguration(TestConfiguration configuration) =>
-  () {
-    configuration.scan(document.querySelector('body'));
-    configuration.configure();
-    return configuration;
-  };
+  @When("I call configure() on the configuration")
+  void callConfigure(Map<String, dynamic> context) {
+    (context["configuration"] as AbstractHtmlInjectConfiguration)
+      .configure();
+  }
 
-void configurationHasBeenAutowired(TestConfiguration configuration) {
-  expect(configuration.hasBeenAutowired, isTrue);
-}
+  @When("I scan the DOM")
+  void scanDOM(Map<String, dynamic> context) {
+    (context["configuration"] as AbstractHtmlInjectConfiguration)
+      .scan(document.querySelector('body'));
+  }
 
-void beansHaveBeenAutowired(TestConfiguration configuration) {
-  expect(configuration.autowiredBean.hasBeenAutowired, isTrue);
+  @Then("the configuration fails")
+  void testConfigurationFails(Map<String, dynamic> context, ContextFunction previous) {
+    expect(() => previous(context), throws);
+  }
+
+  @Then("the configuration succeeds")
+  void testConfigurationSucceeds(Map<String, dynamic> context, ContextFunction previous) {
+    expect(() => previous(context), returnsNormally);
+  }
+
+  @Then("the configuration is autowired")
+  void testContextAutowired(Map<String, dynamic> context) {
+    TestConfiguration configuration = context["configuration"] as TestConfiguration;
+    expect(configuration.hasBeenAutowired, isTrue);
+  }
+
+  @Then("the beans are autowired")
+  void testBeanAutowired(Map<String, dynamic> context) {
+    TestConfiguration configuration = context["configuration"] as TestConfiguration;
+    expect(configuration.autowiredBean.hasBeenAutowired, isTrue);
+  }
 }
 
 // vim: set ai et sw=2 syntax=dart :

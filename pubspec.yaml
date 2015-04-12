@@ -1,5 +1,5 @@
 name: polymer_dependency_injection
-version: 0.0.11
+version: 0.0.12
 author: Matthew Franglen <matthew.franglen@gmail.com>
 homepage: https://github.com/matthewfranglen/dart-polymer-dependency-injection
 description: Spring style annotation driven dependency injection with DOM scanning for autoconfiguration
@@ -9,9 +9,13 @@ dependencies:
   dependency_injection:
     git: git@github.com:matthewfranglen/dart-dependency-injection.git
 dev_dependencies:
+  behave:
+    git: git@github.com:matthewfranglen/dart-behave.git
   unittest: any
 transformers:
 - polymer:
     entry_points:
       - example/index.html
+      - example/button/x_button_test.html
+      - example/label/x_label_test.html
       - test/test_polymer_dependency_injection.html

@@ -2,11 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Example Polymer Dependency Injection</title>
+    <title>Label Test</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="import" href="button/x_button.html">
-    <link rel="import" href="label/x_label.html">
+    <link rel="import" href="x_label.html">
 
     <link rel="import" href="packages/polymer/polymer.html">
 
@@ -19,11 +18,10 @@
     </style>
   </head>
 
-  <body layout vertical center>
-    <h1>Click the button!</h1>
+  <body fullbleed layout vertical>
+    <h1>Running tests...</h1>
     <x-label count="0"></x-label>
-    <x-button></x-button>
-    <script type="application/dart" src="index.dart"></script>
+    <script type="application/dart" src="x_label_test.dart"></script>
+    <script type="text/javascript" src="packages/unittest/test_controller.js"></script>
   </body>
 </html>
-

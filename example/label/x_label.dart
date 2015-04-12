@@ -2,7 +2,7 @@ library polymer_dependency_injection.example.label;
 
 import 'package:polymer/polymer.dart';
 import 'package:dependency_injection/dependency_injection.dart';
-import 'interfaces.dart';
+import '../interfaces.dart';
 
 @CustomTag('x-label')
 @component
