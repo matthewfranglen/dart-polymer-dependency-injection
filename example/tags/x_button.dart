@@ -3,7 +3,7 @@ library polymer_dependency_injection.example.button;
 import 'dart:html';
 import 'package:polymer/polymer.dart';
 import 'package:dependency_injection/dependency_injection.dart';
-import 'interfaces.dart';
+import '../interfaces.dart';
 
 @CustomTag('x-button')
 @component
