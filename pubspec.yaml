@@ -6,8 +6,7 @@ description: Spring style annotation driven dependency injection with DOM scanni
 dependencies:
   polymer: ">=0.14.0 <0.17.0"
   annotate: ">=0.0.1 <0.1.0"
-  dependency_injection:
-    git: git@github.com:matthewfranglen/dart-dependency-injection.git
+  dependency_injection: ">=0.1.0 <0.2.0"
 dev_dependencies:
   behave:
     git: git@github.com:matthewfranglen/dart-behave.git
