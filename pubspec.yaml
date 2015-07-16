@@ -1,13 +1,12 @@
 name: polymer_dependency_injection
-version: 0.0.13
+version: 0.0.14
 author: Matthew Franglen <matthew.franglen@gmail.com>
 homepage: https://github.com/matthewfranglen/dart-polymer-dependency-injection
 description: Spring style annotation driven dependency injection with DOM scanning for autoconfiguration
 dependencies:
   polymer: ">=0.14.0 <0.17.0"
   annotate: ">=0.0.1 <0.1.0"
-  dependency_injection:
-    git: git@github.com:matthewfranglen/dart-dependency-injection.git
+  dependency_injection: ">=0.1.0 <0.2.0"
 dev_dependencies:
   behave:
     git: git@github.com:matthewfranglen/dart-behave.git
